@@ -18,7 +18,7 @@ namespace Lab09_LINQinManhattan
             LoadPropertiesFromJSON();
             OutputAllNeighborhoodsWithSequentialQueries();
             OutputAllNeighborhoodsWithNamesUniqueOneQuery();
-            OutputAllNeighborhoodsWithNamesUniqueUsingLINQ();
+            OutputAllNeighborhoodsWithNamesUniqueUsingQuerySyntax();
         }
 
         /// <summary>
@@ -45,15 +45,15 @@ namespace Lab09_LINQinManhattan
         }
 
         /// <summary>
-        /// Outputs to the console the following:
-        /// 1.) All the neighborhoods with no filter
-        /// 2.) All the neighborhoods with non-empty, non-null, names
-        /// 3.) All the unique neighborhoods with non-empty, non-null, names.
+        /// <para>Outputs to the console the following:</para>
+        /// <para>1.) All the neighborhoods with no filter</para>
+        /// <para>2.) All the neighborhoods with non-empty, non-null, names</para>
+        /// <para>3.) All the unique neighborhoods with non-empty, non-null, names.</para>
         /// </summary>
         static void OutputAllNeighborhoodsWithSequentialQueries()
         {
             var allNeighborhoods = Properties
-                                .Select(prop => new { prop.Neighborhood });
+                                    .Select(prop => new { prop.Neighborhood });
             Console.WriteLine("Total neighborhoods in dataset: {0}", allNeighborhoods.Count());
             foreach (var oneNeighborhood in allNeighborhoods)
             {
@@ -62,7 +62,7 @@ namespace Lab09_LINQinManhattan
             Console.WriteLine();
 
             var allNeighborhoodsWithNames = allNeighborhoods
-                .Where(prop => !String.IsNullOrEmpty(prop.Neighborhood));
+                                            .Where(prop => !String.IsNullOrEmpty(prop.Neighborhood));
             Console.WriteLine("Neighborhoods with names in dataset: {0}", allNeighborhoodsWithNames.Count());
             foreach (var oneNeighborhood in allNeighborhoodsWithNames)
             {
@@ -86,9 +86,9 @@ namespace Lab09_LINQinManhattan
         static void OutputAllNeighborhoodsWithNamesUniqueOneQuery()
         {
             var allNeighborhoodsWithNamesUnique = Properties
-                                    .Select(prop => new { prop.Neighborhood })
-                                    .Where(prop => !String.IsNullOrEmpty(prop.Neighborhood))
-                                    .Distinct();
+                                                    .Select(prop => new { prop.Neighborhood })
+                                                    .Where(prop => !String.IsNullOrEmpty(prop.Neighborhood))
+                                                    .Distinct();
             Console.WriteLine("Using a single LINQ Method statement, unique neighborhoods with names in dataset: {0}", allNeighborhoodsWithNamesUnique.Count());
             foreach (var oneNeighborhood in allNeighborhoodsWithNamesUnique)
             {
@@ -100,7 +100,7 @@ namespace Lab09_LINQinManhattan
         /// <summary>
         /// Outputs to the console all the neighborhoods with non-empty, non-null, names that are unique. Uses a single LINQ Query statement.
         /// </summary>
-        static void OutputAllNeighborhoodsWithNamesUniqueUsingLINQ()
+        static void OutputAllNeighborhoodsWithNamesUniqueUsingQuerySyntax()
         {
             var allNeighborhoodsWithNamesUniqueUsingLINQ = (from prop in Properties
                                                             where !String.IsNullOrEmpty(prop.Neighborhood)
