@@ -13,10 +13,5 @@ namespace Lab09_LINQinManhattan.Classes
         public string Borough { get; set; }
         public string Neighborhood { get; set; }
         public string County { get; set; }
-
-        public override string ToString()
-        {
-            return Neighborhood;
-        }
     }
 }
